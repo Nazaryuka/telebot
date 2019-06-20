@@ -5,8 +5,11 @@
 //     credential: admin.credential.cert(serviceAccount)
 //     });
 // const db = admin.firestore();
-let token = '819347685:AAHd2QJ-P3y6eb9tURKB-gMOVhRPFqtOvrw';
-const TelegramBot = require('../');
+
+
+
+const TOKEN = process.env.TELEGRAM_TOKEN || '819347685:AAHd2QJ-P3y6eb9tURKB-gMOVhRPFqtOvrw';
+const TelegramBot = require('../..');
 const options = {
     webHook: {
         // Port to which you should bind is assigned to $PORT variable
@@ -17,7 +20,11 @@ const options = {
         // Also no need to pass IP because on Heroku you need to bind to 0.0.0.0
     }
 };
-const url = process.env.APP_URL || 'https://telebotheroku.herokuapp.com:443';
+// Heroku routes from port :443 to $PORT
+// Add URL of your app to env variable or enable Dyno Metadata
+// to get this automatically
+// See: https://devcenter.heroku.com/articles/dyno-metadata
+const url = process.env.APP_URL || 'https://<app-name>.herokuapp.com:443';
 const bot = new TelegramBot(TOKEN, options);
 
 
@@ -30,21 +37,3 @@ bot.setWebHook(`${url}/bot${TOKEN}`);
 bot.on('message', function onMessage(msg) {
     bot.sendMessage(msg.chat.id, 'I am alive on Heroku!');
 });
-
-
-
-
-
-//const test = {
-//     city: "kiev"
-//     };
-//
-//
-//
-// bot.onText(/н/, function (msg, match) {
-//     let userId = msg.from.id;
-//     //db.collection('bot').doc(userId).update(test);
-//     console.log('new writen');
-//     bot.sendMessage(userId, 'Отлично! Я обязательно напомню, если не сдохну :)');
-// });
-
