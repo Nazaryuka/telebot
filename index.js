@@ -1,10 +1,10 @@
-const admin = require('firebase-admin');
-const serviceAccount = require('./ServiceAccountKey.json');
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-    });
-const db = admin.firestore();
 
+///const admin = require('firebase-admin');
+// const serviceAccount = require('./ServiceAccountKey.json');
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount)
+//     });
+// const db = admin.firestore();
 let token = '819347685:AAHd2QJ-P3y6eb9tURKB-gMOVhRPFqtOvrw';
 const TelegramBot = require('../');
 const options = {
@@ -17,7 +17,7 @@ const options = {
         // Also no need to pass IP because on Heroku you need to bind to 0.0.0.0
     }
 };
-const url = process.env.APP_URL || 'https:/telebotheroku.herokuapp.com:443';
+const url = process.env.APP_URL || 'https://telebotheroku.herokuapp.com:443';
 const bot = new TelegramBot(TOKEN, options);
 
 
